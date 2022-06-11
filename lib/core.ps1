@@ -1,3 +1,28 @@
+function ConvertTo-MirrorUrl ($Url) {
+    $map = @{
+        '//github.com/'                = '//hub.verge.tk/';
+        '//raw.githubusercontent.com/' = '//raw.verge.tk/'
+    }
+    if ($map.Keys | Where-Object { $Url -match $_ }) {
+        if ($null -eq $env:SCOOP_INGFW) {
+            try {
+                Invoke-WebRequest 'https://v2ray.com/robots.txt' -UseBasicParsing -TimeoutSec 3 | Out-Null
+                $env:SCOOP_INGFW = 'false'
+                $is = Get-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\'
+                if ($is.ProxyEnable) {
+                    $env:http_proxy = $env:https_proxy = $is.ProxyServer
+                }
+            } catch {
+                $env:SCOOP_INGFW = 'true'
+            }
+        }
+        if ($env:SCOOP_INGFW -eq 'true') {
+            $map.Keys | ForEach-Object { $Url = $Url -replace $_, $map[$_] }
+        }
+    }
+    return $Url
+}
+
 function Optimize-SecurityProtocol {
     # .NET Framework 4.7+ has a default security protocol called 'SystemDefault',
     # which allows the operating system to choose the best protocol to use.
