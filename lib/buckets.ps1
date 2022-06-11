@@ -58,7 +58,7 @@ function Get-LocalBucket {
     .SYNOPSIS
         List all local buckets.
     #>
-    $bucketNames = (Get-ChildItem -Path $bucketsdir -Directory).Name
+    $bucketNames = ((Get-ChildItem -Path $bucketsdir -Directory -Filter 'main'), (Get-ChildItem -Path $bucketsdir -Directory -Exclude 'main')).Name
     if ($null -eq $bucketNames) {
         return @() # Return a zero-length list instead of $null.
     } else {
@@ -124,6 +124,7 @@ function add_bucket($name, $repo) {
         return 2
     }
 
+    $repo = ConvertTo-MirrorUrl $repo
     $uni_repo = Convert-RepositoryUri -Uri $repo
     if ($null -eq $uni_repo) {
         return 1
@@ -146,7 +147,7 @@ function add_bucket($name, $repo) {
     }
     ensure $bucketsdir | Out-Null
     $dir = ensure $dir
-    git_cmd clone "$repo" "`"$dir`"" -q
+    git_cmd clone "$repo" "`"$dir`"" -q --depth=1
     Write-Host 'OK'
     success "The $name bucket was added successfully."
     return 0

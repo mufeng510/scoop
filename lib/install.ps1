@@ -191,9 +191,9 @@ function dl_with_cache_aria2($app, $version, $manifest, $architecture, $dir, $co
         "--allow-overwrite=true"
         "--auto-file-renaming=false"
         "--retry-wait=$(get_config 'aria2-retry-wait' 2)"
-        "--split=$(get_config 'aria2-split' 5)"
-        "--max-connection-per-server=$(get_config 'aria2-max-connection-per-server' 5)"
-        "--min-split-size=$(get_config 'aria2-min-split-size' '5M')"
+        "--split=$(get_config 'aria2-split' 1024)"
+        "--max-connection-per-server=$(get_config 'aria2-max-connection-per-server' 16)"
+        "--min-split-size=$(get_config 'aria2-min-split-size' '1M')"
         "--console-log-level=warn"
         "--enable-color=false"
         "--no-conf=true"
@@ -242,8 +242,8 @@ function dl_with_cache_aria2($app, $version, $manifest, $architecture, $dir, $co
         } else {
             $download_finished = $false
             # create aria2 input file content
-            $urlstxt_content += "$(handle_special_urls $url)`n"
-            if (!$url.Contains('sourceforge.net')) {
+            $urlstxt_content += "$(handle_special_urls $(ConvertTo-MirrorUrl $url))`n"
+            if(!$url.Contains('sourceforge.net')) {
                 $urlstxt_content += "    referer=$(strip_filename $url)`n"
             }
             $urlstxt_content += "    dir=$cachedir`n"
@@ -352,6 +352,7 @@ function dl_with_cache_aria2($app, $version, $manifest, $architecture, $dir, $co
 
 # download with filesize and progress indicator
 function dl($url, $to, $cookies, $progress) {
+    $url = ConvertTo-MirrorUrl $url
     $reqUrl = ($url -split '#')[0]
     $wreq = [Net.WebRequest]::Create($reqUrl)
     if ($wreq -is [Net.HttpWebRequest]) {

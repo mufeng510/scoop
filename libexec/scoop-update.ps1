@@ -37,9 +37,10 @@ $all = $opt.a -or $opt.all
 # load config
 $configRepo = get_config SCOOP_REPO
 if (!$configRepo) {
-    $configRepo = "https://github.com/ScoopInstaller/Scoop"
+    $configRepo = "https://github.com/star2000/scoop"
     set_config SCOOP_REPO $configRepo | Out-Null
 }
+$configRepo = ConvertTo-MirrorUrl $configRepo
 
 # Find current update channel from config
 $configBranch = get_config SCOOP_BRANCH
@@ -70,7 +71,7 @@ function update_scoop() {
         $olddir = "$currentdir\..\old"
 
         # get git scoop
-        git_cmd clone -q $configRepo --branch $configBranch --single-branch "`"$newdir`""
+        git_cmd clone -q $configRepo --branch $configBranch --single-branch "`"$newdir`"" --depth=1
 
         # check if scoop was successful downloaded
         if (!(Test-Path "$newdir\bin\scoop.ps1")) {
@@ -142,16 +143,16 @@ function update_scoop() {
         $bucketLoc = Find-BucketDirectory $bucket -Root
 
         if (!(Test-Path (Join-Path $bucketLoc '.git'))) {
-            if ($bucket -eq 'main') {
-                # Make sure main bucket, which was downloaded as zip, will be properly "converted" into git
-                Write-Host " Converting 'main' bucket to git repo..."
-                $status = rm_bucket 'main'
+            if ($bucket -in ('main', 'apps')) {
+                # Make sure main and apps bucket, which was downloaded as zip, will be properly "converted" into git
+                Write-Host " Converting '$bucket' bucket to git repo..."
+                $status = rm_bucket $bucket
                 if ($status -ne 0) {
-                    abort "Failed to remove local 'main' bucket."
+                    abort "Failed to remove local '$bucket' bucket."
                 }
-                $status = add_bucket 'main' (known_bucket_repo 'main')
+                $status = add_bucket $bucket (known_bucket_repo $bucket)
                 if ($status -ne 0) {
-                    abort "Failed to add remote 'main' bucket."
+                    abort "Failed to add remote '$bucket' bucket."
                 }
             } else {
                 Write-Host "'$bucket' is not a git repository. Skipped."

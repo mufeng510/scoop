@@ -30,7 +30,7 @@
 # NO_JUNCTIONS: $true|$false
 #       The 'current' version alias will not be used. Shims and shortcuts will point to specific version instead.
 #
-# SCOOP_REPO: http://github.com/ScoopInstaller/Scoop
+# SCOOP_REPO: https://github.com/star2000/scoop
 #       Git repository containining scoop source code.
 #       This configuration is useful for custom forks.
 #
@@ -114,15 +114,15 @@
 #       Number of seconds to wait between retries.
 #       See: 'https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-retry-wait'
 #
-# aria2-split: 5
+# aria2-split: 1024
 #       Number of connections used for downlaod.
 #       See: 'https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-s'
 #
-# aria2-max-connection-per-server: 5
+# aria2-max-connection-per-server: 16
 #       The maximum number of connections to one server for each download.
 #       See: 'https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-x'
 #
-# aria2-min-split-size: 5M
+# aria2-min-split-size: 1M
 #       Downloaded files will be splitted by this configured size and downloaded using multiple connections.
 #       See: 'https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-k'
 #
