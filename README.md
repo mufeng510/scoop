@@ -11,7 +11,7 @@
 ## 安装
 
 ```powershell
-iwr -useb https://fastly.jsdelivr.net/gh/star2000/scoop/install.ps1 | iex
+Set-ExecutionPolicy rem -s c;iwr -useb https://fastly.jsdelivr.net/gh/star2000/scoop/install.ps1 | iex
 ```
 
 ## 用法
