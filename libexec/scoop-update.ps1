@@ -37,7 +37,7 @@ $all = $opt.a -or $opt.all
 # load config
 $configRepo = get_config SCOOP_REPO
 if (!$configRepo) {
-    $configRepo = ConvertTo-MirrorUrl "https://github.com/star2000/scoop"
+    $configRepo = ConvertTo-MirrorUrl "https://github.com/mufeng510/scoop"
     set_config SCOOP_REPO $configRepo | Out-Null
 }
 $configRepo = $configRepo

@@ -606,7 +606,7 @@ $SCOOP_CONFIG_HOME = $env:XDG_CONFIG_HOME, "$env:USERPROFILE\.config" | Select-O
 $SCOOP_CONFIG_FILE = "$SCOOP_CONFIG_HOME\scoop\config.json"
 
 # TODO: Use a specific version of Scoop and the main bucket
-$SCOOP_PACKAGE_REPO = ConvertTo-MirrorUrl "https://github.com/star2000/scoop/archive/master.zip"
+$SCOOP_PACKAGE_REPO = ConvertTo-MirrorUrl "https://github.com/mufeng510/scoop/archive/master.zip"
 $SCOOP_MAIN_BUCKET_REPO = ConvertTo-MirrorUrl "https://github.com/ScoopInstaller/Main/archive/master.zip"
 $SCOOP_APPS_BUCKET_REPO = ConvertTo-MirrorUrl "https://github.com/kkzzhizhou/scoop-apps/archive/master.zip"
 

@@ -30,7 +30,7 @@
 # no_junction: $true|$false
 #       The 'current' version alias will not be used. Shims and shortcuts will point to specific version instead.
 #
-# scoop_repo: https://github.com/star2000/scoop
+# scoop_repo: https://github.com/mufeng510/scoop
 #       Git repository containining scoop source code.
 #       This configuration is useful for custom forks.
 #
