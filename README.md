@@ -11,8 +11,10 @@
 ## 安装
 
 ```powershell
-Set-ExecutionPolicy rem -s c;iwr -useb https://mirror.ghproxy.com/https://raw.githubusercontent.com/star2000/scoop/master/install.ps1 | iex
+Set-ExecutionPolicy rem -s c;iwr -useb https://mirror.ghproxy.com/https://raw.githubusercontent.com/mufeng510/scoop/master/install.ps1 | iex
 ```
+
+管理员需要添加`-RunAsAdmin`
 
 ## 用法
 
