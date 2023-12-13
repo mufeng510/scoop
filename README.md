@@ -19,7 +19,7 @@ Set-ExecutionPolicy rem -s c;iwr -useb https://mirror.ghproxy.com/https://raw.gi
 管理员执行
 
 ```powershell
-Set-ExecutionPolicy rem -s c;iwr -useb https://mirror.ghproxy.com/https://raw.githubusercontent.com/star2000/scoop/master/install.ps1 -outfile 'install.ps1';.\install.ps1 -RunAsAdmin;rm .\install.ps1
+Set-ExecutionPolicy rem -s c;iwr -useb https://mirror.ghproxy.com/https://raw.githubusercontent.com/mufeng510/scoop/master/install.ps1 -outfile 'install.ps1';.\install.ps1 -RunAsAdmin;rm .\install.ps1
 ```
 
 ## 用法
