@@ -40,6 +40,7 @@ if (!$configRepo) {
     $configRepo = ConvertTo-MirrorUrl "https://github.com/mufeng510/scoop"
     set_config SCOOP_REPO $configRepo | Out-Null
 }
+Write-Output "Repo is '$configRepo'"
 $configRepo = $configRepo
 
 # Find current update channel from config
