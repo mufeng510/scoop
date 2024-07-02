@@ -38,10 +38,11 @@ $all = $opt.a -or $opt.all
 # load config
 $configRepo = get_config SCOOP_REPO
 if (!$configRepo) {
-    $configRepo = 'https://github.com/star2000/scoop'
+    $configRepo = ConvertTo-MirrorUrl 'https://github.com/mufeng510/scoop'
     set_config SCOOP_REPO $configRepo | Out-Null
 }
-$configRepo = ConvertTo-MirrorUrl $configRepo
+Write-Output "Repo is '$configRepo'"
+$configRepo = $configRepo
 
 # Find current update channel from config
 $configBranch = get_config SCOOP_BRANCH
